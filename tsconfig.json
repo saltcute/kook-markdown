@@ -13,13 +13,20 @@
         "target": "es2020",
         "module": "commonjs",
         "moduleResolution": "node",
-        "lib": ["es2020"],
+        "lib": [
+            "es2021"
+        ],
         "baseUrl": "./src",
-        "rootDirs": ["src"],
+        "rootDirs": [
+            "src"
+        ],
         "outDir": "./dist",
         // "outFile": "./dist/kbotify.js",
         "strict": true,
-        "typeRoots": ["./typings", "node_modules/@types"],
+        "typeRoots": [
+            "./typings",
+            "node_modules/@types"
+        ],
         // "paths": {
         //     "kaiheila-bot-root": ["node_modules/kaiheila-bot-root"],
         //     "kaiheila-bot-root/*": ["node_modules/kaiheila-bot-root/*"]
@@ -36,5 +43,7 @@
         "./src/**/*.ts",
         ".eslintrc.js",
     ],
-    "exclude": ["./src/tests/*.ts"]
+    "exclude": [
+        "./src/tests/*.ts"
+    ]
 }
