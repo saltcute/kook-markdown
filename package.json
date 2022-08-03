@@ -1,10 +1,11 @@
 {
   "name": "kook-markdown",
   "version": "1.0.0",
-  "description": "Starter kit for kBotify bots",
+  "description": "kook-markdown",
   "main": "src/index.ts",
   "scripts": {
-    "start": "node --nolazy -r ts-node/register -r tsconfig-paths/register src/index.ts"
+    "start": "node --nolazy -r ts-node/register -r tsconfig-paths/register src/index.ts",
+    "pm2": "pm2 start pm2-windows.js"
   },
   "repository": {
     "type": "git",
@@ -15,12 +16,12 @@
     "kaiheila",
     "bot"
   ],
-  "author": "FlappyIce",
+  "author": "potatopotat0",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fi6/kbotify-template/issues"
+    "url": "https://github.com/potatopotat0/kook-markdown/issues"
   },
-  "homepage": "https://github.com/fi6/kbotify-template#readme",
+  "homepage": "https://github.com/potatopotat0/kook-markdown#readme",
   "dependencies": {
     "@types/node-schedule": "^2.1.0",
     "kbotify": "^0.2.5",
