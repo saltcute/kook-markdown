@@ -1,7 +1,7 @@
 {
   "name": "kook-markdown",
   "version": "1.0.0",
-  "description": "kook-markdown",
+  "description": "Translate your kmarkdown source code to rich text!",
   "main": "src/index.ts",
   "scripts": {
     "start": "node --nolazy -r ts-node/register -r tsconfig-paths/register src/index.ts",
@@ -14,7 +14,9 @@
   "keywords": [
     "kbotify",
     "kaiheila",
-    "bot"
+    "bot",
+    "kmarkdown",
+    "markdown"
   ],
   "author": "potatopotat0",
   "license": "MIT",
