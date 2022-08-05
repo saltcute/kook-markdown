@@ -2,6 +2,8 @@ import * as md from 'commands/md/register';
 import { bot } from 'init/client';
 import { markdownMenu } from './commands/md/md.menu';
 import schedule from 'node-schedule';
+import axios from 'axios';
+import auth from 'configs/auth';
 
 bot.messageSource.on('message', (e) => {
     bot.logger.debug(`received:`, e);
@@ -57,3 +59,31 @@ bot.addCommands(markdownMenu);
 bot.connect();
 
 bot.logger.debug('system init success');
+
+if (auth.useBotmarket) {
+    botMarketStayOnline();
+}
+
+function botMarketStayOnline() {
+    axios({
+        url: 'http://bot.gekj.net/api/v1/online.bot',
+        method: "POST",
+        headers: {
+            uuid: auth.botMarketUUID
+        }
+    }).then((res) => {
+        if (res.data.code == 0) {
+            bot.logger.info(`Bot Market online status updating success, remote returning: `);
+            bot.logger.info(res.data);
+            setTimeout(botMarketStayOnline, (res.data.data.onTime + 5) * 1000);
+        } else if (res.data.code == -1) {
+            bot.logger.warn(`Bot Market online status updating failed. Retring in 30 minutes. Error message: `);
+            bot.logger.warn(res.data);
+            setTimeout(botMarketStayOnline, 30 * 60 * 1000);
+        }
+    }).catch((e) => {
+        bot.logger.warn(`Bot Market heartbeat request failed. Retring in 30 minutes. Error message: `);
+        bot.logger.warn(e);
+        setTimeout(botMarketStayOnline, 30 * 60 * 1000);
+    })
+}

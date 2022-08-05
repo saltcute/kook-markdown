@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { bot } from 'init/client';
 import upath from 'upath';
 
 export var registerList: {
@@ -9,20 +10,20 @@ export var registerList: {
 export async function load() {
     if (fs.existsSync(upath.join(__dirname, "reg.json"))) {
         registerList = JSON.parse(fs.readFileSync(upath.join(__dirname, "reg.json"), { encoding: "utf-8", flag: "r" }));
-        console.log(`Loaded linkmap from local`);
+        bot.logger.info(`Loaded registration list from local`);
     } else {
         save();
-        console.log(`Linkmap not found, creating new`);
+        bot.logger.warn(`Registration list not found, creating new`);
     }
 }
 export function save() {
     fs.writeFile(upath.join(__dirname, "reg.json"), JSON.stringify(registerList), (e) => {
         if (e) {
-            console.error(`Saving linkmap failed, error message: `);
-            console.error(e);
+            bot.logger.error(`Saving registration list failed, error message: `);
+            bot.logger.error(e);
         }
         else {
-            console.log(`Saved linkmap`);
+            bot.logger.info(`Saved registration list`);
         }
     });
 }
