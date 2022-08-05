@@ -21,7 +21,7 @@ bot.on("kmarkdownMessage", (event) => {
     if (md.isRegistered(event.channelId, event.author.id)) {
         var content = event.content
             .replaceAll("\\\\", "[doubleslash]")
-            .replaceAll("||", "(spl)")
+            // .replaceAll("||", "(spl)")
             // .replaceAll("__", "(ins)")
             .replaceAll("\\", "")
             .replaceAll("[doubleslash]", "\\\\");
