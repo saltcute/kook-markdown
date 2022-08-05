@@ -5,11 +5,10 @@ import schedule from 'node-schedule';
 import axios from 'axios';
 import auth from 'configs/auth';
 
-bot.messageSource.on('message', (e) => {
-    bot.logger.debug(`received:`, e);
-    // 如果想要在console里查看收到信息也可以用
-    //console.log(e);
-});
+bot.logger.fields.name = "kook-markdown";
+bot.logger.addStream({ level: bot.logger.INFO, stream: process.stdout });
+// bot.logger.addStream({ level: bot.logger.DEBUG, stream: process.stdout }); // DEBUG
+bot.logger.info("kook-markdown initialization start");
 
 md.load();
 
@@ -46,9 +45,9 @@ bot.on("kmarkdownMessage", (event) => {
             || /(\(spl\)).+(\(spl\))/.test(content)         // Match (spl)spolier(spl) or ||spolier||
         ) {
             bot.API.message.create(9, event.channelId, content, event.msgId).then((val) => {
-                if (val) console.log("Success");
+                if (val) bot.logger.info(`Translated: ${content}`);
             }).catch((e) => {
-                console.log(e);
+                if (e) bot.logger.error(e);
             })
         }
     }
