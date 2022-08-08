@@ -34,9 +34,9 @@ bot.on("kmarkdownMessage", (event) => {
             }
         }
         if (false
-            || /\s(\*).+(\*)\s/.test(content)               // Match *italic*
-            || /\s(\*\*).+(\*\*)\s/.test(content)           // Match **bold**
-            || /\[[^]]+\]\(https?:\/\/\S+\)/.test(content)  // Match [links with](http:// or https://)
+            || /(\*).+(\*)/.test(content)               // Match *italic*
+            || /(\*\*).+(\*\*)/.test(content)           // Match **bold**
+            || /\[[^\]]+\]\(https?:\/\/\S+\)/.test(content)  // Match [links with](http:// or https://)
             || /\`[^`^\n]+\`/.test(content)                 // Match `inline code`
             || /\`\`\`.*\n(.+\n)+\`\`\`/.test(content)      // Match ```language
             //                                                       code blocks
