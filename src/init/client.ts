@@ -1,12 +1,22 @@
-import { KBotify } from 'kbotify';
+import Kasumi from 'kasumi.js';
+import { KasumiConfig } from 'kasumi.js/dist/type';
 import auth from '../configs/auth';
 
 let mode = <'websocket' | 'webhook'>auth.mode || 'websocket';
-export const bot = new KBotify({
-    mode: mode, //确保和开黑啦应用的后台设置一样。如果使用webhook，请详细阅读开发者手册关于"?compress=0"的部分。
-    token: auth.khltoken,
-    port: auth.khlport,
-    verifyToken: auth.khlverify,
-    key: auth.khlkey,
-    ignoreDecryptError: true,
-});
+let config: KasumiConfig;
+if (mode == 'websocket') {
+    config = {
+        type: 'websocket',
+        vendor: 'botroot',
+        token: auth.khltoken
+    }
+} else {
+    config = {
+        type: 'webhook',
+        token: auth.khltoken,
+        verifyToken: auth.khlverify,
+        encryptKey: auth.khlkey,
+        port: auth.khlport
+    }
+}
+export const bot = new Kasumi(config);

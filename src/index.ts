@@ -5,9 +5,6 @@ import schedule from 'node-schedule';
 import axios from 'axios';
 import auth from 'configs/auth';
 
-bot.logger.fields.name = "kook-markdown";
-bot.logger.addStream({ level: bot.logger.INFO, stream: process.stdout });
-// bot.logger.addStream({ level: bot.logger.DEBUG, stream: process.stdout }); // DEBUG
 bot.logger.info("kook-markdown initialization start");
 
 md.load();
@@ -16,7 +13,7 @@ schedule.scheduleJob('15 * * * *', async () => {
     md.save();
 })
 
-bot.on("kmarkdownMessage", (event) => {
+bot.message.on('allTextMessages', (event) => {
     if (md.isRegistered(event.channelId, event.author.id)) {
         var content = event.content
             .replaceAll("\\\\", "[doubleslash]")
@@ -44,7 +41,7 @@ bot.on("kmarkdownMessage", (event) => {
             || /(\(ins\)).+(\(ins\))/.test(content)         // Match (ins)underscore(ins) or __underscore__
             || /(\(spl\)).+(\(spl\))/.test(content)         // Match (spl)spolier(spl) or ||spolier||
         ) {
-            bot.API.message.create(9, event.channelId, content, event.msgId).then((val) => {
+            bot.API.message.create(9, event.channelId, content, event.messageId).then((val) => {
                 if (val) bot.logger.info(`Translated: ${content}`);
             }).catch((e) => {
                 if (e) bot.logger.error(e);
@@ -53,7 +50,7 @@ bot.on("kmarkdownMessage", (event) => {
     }
 })
 
-bot.addCommands(markdownMenu);
+bot.plugin.load(markdownMenu);
 
 bot.connect();
 
