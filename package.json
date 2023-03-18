@@ -26,7 +26,7 @@
   "homepage": "https://github.com/potatopotat0/kook-markdown#readme",
   "dependencies": {
     "@types/node-schedule": "^2.1.0",
-    "kasumi.js": "^0.1.17",
+    "kasumi.js": "^0.1.22",
     "kbotify": "^0.2.5",
     "node-schedule": "^2.1.0",
     "ts-node": "^10.9.1",

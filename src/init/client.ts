@@ -7,7 +7,7 @@ let config: KasumiConfig;
 if (mode == 'websocket') {
     config = {
         type: 'websocket',
-        vendor: 'botroot',
+        // vendor: 'botroot',
         token: auth.khltoken
     }
 } else {
